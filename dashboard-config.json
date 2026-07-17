@@ -1,0 +1,45 @@
+{
+  "displayName": "Retail Organization",
+  "dashboardId": "01f181b9a2f91c1cae36170f34f45ee4",
+  "dashboardUrl": "https://dbc-a7c1a55e-7572.cloud.databricks.com/dashboardsv3/01f181b9a2f91c1cae36170f34f45ee4",
+  "datasets": [
+    {
+      "name": "Sales goal",
+      "query": "SELECT sum(total_price) AS Total_Sales, 3000000 AS Sales_Goal FROM databricks_simulated_retail_customer_data.v01.sales;"
+    },
+    {
+      "name": "Sales over 3 mounth",
+      "query": "SELECT customer_name, \r\n       total_price AS Total_Sales, \r\n       date_format(order_date, \"MM\") AS Month, \r\n       product_category \r\nFROM databricks_simulated_retail_customer_data.v01.sales \r\nWHERE order_date >= to_date('2019-08-01')\r\nAND order_date <=  to_date('2019-10-31');"
+    }
+  ],
+  "widgets": [
+    {
+      "title": "Sales Goal",
+      "type": "counter",
+      "description": "Displays total sales vs sales goal with color coding"
+    },
+    {
+      "title": "Three Month Sales",
+      "type": "combo",
+      "description": "Shows total sales and number of sales by month (Aug-Oct 2019)"
+    },
+    {
+      "title": "Average Sales by Category",
+      "type": "bar",
+      "description": "Bar chart showing average, min, and max sales by product category"
+    },
+    {
+      "title": "Bar 2",
+      "type": "scatter",
+      "description": "Scatter plot of daily order dates vs sum of total price"
+    },
+    {
+      "title": "Product Category Filter",
+      "type": "filter-single-select",
+      "description": "Interactive filter for product categories"
+    }
+  ],
+  "dataSources": [
+    "databricks_simulated_retail_customer_data.v01.sales"
+  ]
+}
